@@ -1,0 +1,19 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+
+	<h1>Knight tracker</h1>
+
+	{control form}
+
+	{ifset $path}
+		<p>Cesta koně z {$path[0]} do {$path[count($path) - 1]}:</p>
+		<ul>
+			{foreach $path as $key => $value}
+				<li>Pole {$key + 1}: {$value}</li>
+			{/foreach}
+		</ul>
+	{/ifset}
+
+{/block}
+

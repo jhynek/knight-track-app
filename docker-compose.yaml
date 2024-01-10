@@ -1,0 +1,31 @@
+version: "3.6"
+
+services:
+
+  nginx:
+    build:
+      context: ./
+      dockerfile: .docker/nginx/Dockerfile
+    networks:
+      - common
+    depends_on:
+      - php-fpm
+    volumes:
+      - ./www:/media/share/knight-track/www
+    ports:
+      - 80:80
+
+  php-fpm:
+    build:
+      context: ./
+      dockerfile: .docker/php-fpm/Dockerfile
+    tmpfs:
+      - /tmp:exec,mode=777
+    volumes:
+      - ./:/media/share/knight-track
+    networks:
+      - common
+
+networks:
+  common:
+    driver: bridge
